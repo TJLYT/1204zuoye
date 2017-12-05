@@ -1,0 +1,38 @@
+main方法 在的类继承WebMvcConfigurerAdapter
+
+HTML 页面写在templates里面
+
+thymeleaf 页面传值使用&拼接字符串时时要用&amp;
+themeleaf 必须要使用严格的完整的HTML标签，不能少标签。
+
+@RequestParam的使用
+属性：
+defaultValue前台传值为null时使用默认值
+required 为true时前台一定要有name字段传过来，name字段可以为null，
+
+@RequestMapping(value = "/value2")
+	public void getValue2(@RequestParam(name = "name", required = false, defaultValue = "默认名字")String name,int age) {
+		System.out.println("name="+name+"  age="+age);
+	}
+	
+	在接收多参数时，可以使用Map去接受，一定要写@Requestparam
+	获取实体类信息的注解@ModelAttribute，一般适用于给绑定整体对象进行注解的。
+	
+	通过postman传值
+	@RequestMapping(value="/save")
+	@ResponseBody
+	public String save(@RequestParam Map<String,String> params) {
+	java.util.Iterator<java.util.Map.Entry<String, String>> iterator = params.entrySet().iterator();
+		while(iterator.hasNext()) {
+			java.util.Map.Entry<String, String> entity = iterator.next();
+			System.out.println(entity.getKey());
+			System.out.println(entity.getValue());
+		}
+		return "result";
+		
+	}
+	1请求和重定向使用时的不同
+	       不想让地址栏发生改变，就用请求。
+	    一般传参用forward，redirct尽量不传参。
+	在控制层@RestController全部转成json类型
+	
